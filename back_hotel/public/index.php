@@ -9,7 +9,7 @@ use WoohooLabs\Harmony\Middleware\HttpHandlerRunnerMiddleware;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
 use Zend\HttpHandlerRunner\Emitter\SapiEmitter;
-
+use App\Connections\DataHotelDB;
 
 try {
     // carga el archivo de entorno
@@ -37,6 +37,10 @@ try {
     if (!$route) {
         echo 'No route';
     } else {
+        
+        //Boot Database Connection
+        new DataHotelDB();
+        
         try {
             $harmony = new Harmony($request, new Response());
             $harmony->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()));

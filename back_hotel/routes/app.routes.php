@@ -9,22 +9,21 @@
 $map->get('index', '/', ['App\Controllers\IndexController', 'indexAction']);
 
 /// administracion hotel
-$map->get('lista.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->post('add.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
+$map->get('lista.hotel', '/hoteles', ['App\Controllers\HotelesController', 'getHoteles']);
+$map->post('add.hotel', '/hotel/add', ['App\Controllers\HotelesController', 'addHotel']);
+$map->put('edit.hotel', '/hotel/edit', ['App\Controllers\HotelesController', 'updateHotel']);
+$map->get('get.hotel', '/hotel/{id}', ['App\Controllers\HotelesController', 'getHotel']);
+$map->delete('delete.hotel', '/hotel/delete', ['App\Controllers\HotelesController', 'indexAction']);
 
-$map->get('lista.dep', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->get('lista.ciu', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->get('lista.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
-
-$map->put('edit.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->get('get.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->delete('delete.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
+$map->get('lista.dep', '/list-depar', ['App\Controllers\CiudadesController', 'getDepartamentos']);
+$map->get('lista.ciu', '/list-ciudad', ['App\Controllers\CiudadesController', 'getCiudadesDep']);
 
 // administrar habitaciones
 
-$map->get('hab.hotel', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->get('tipo.habit', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->get('acom.habit', '/', ['App\Controllers\IndexController', 'indexAction']);
+$map->get('tipo.habit', '/list-habit', ['App\Controllers\IndexController', 'getHabitaciones']);
+$map->get('acom.habit', '/acomodacion-habit', ['App\Controllers\IndexController', 'getAcomodaciones']);
 
-$map->post('add.habitacion', '/', ['App\Controllers\IndexController', 'indexAction']);
-$map->delete('delete.habitacion', '/', ['App\Controllers\IndexController', 'indexAction']);
+$map->get('hab.hotel', '/habitaciones', ['App\Controllers\AdminController', 'indexAction']);
+$map->post('add.habitacion', '/habitacion/add', ['App\Controllers\AdminController', 'addHabitacionHotel']);
+$map->put('edit.habitacion', '/habitacion/{id}', ['App\Controllers\AdminController', 'updateHabitacionHotel']);
+$map->delete('delete.habitacion', '/habitacion/delete', ['App\Controllers\AdminController', 'deleteHabitacionHotel']);
