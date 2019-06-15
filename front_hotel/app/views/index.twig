@@ -1,0 +1,76 @@
+{% extends "layout.twig" %}
+
+{% block styles %}
+
+    <!-- datatable -->
+    <link type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block content %}
+    <!-- Static navbar -->
+    
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="row">
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Lista de Clientes</div>
+            <div class="panel-body">
+                <div class="row">
+                    <a class="btn btn-default" href="hotel/form">Agregar</a>
+                </div>
+                <hr>
+                <div class="row">
+                    <table id="listado" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Ciudad</th>
+                                <th>Op</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%if listaClientes %}
+                                {%for clientes in listaClientes %}
+                                    <tr>
+                                        <td class="text-center">
+                                            <span data="{{clientes.cod}}">{{clientes.cod}}</span>
+                                        </td>
+                                        <td>{{clientes.name}}</td>
+                                        <td>{{clientes.city}}</td>
+                                        <td>
+                                            <a class="btn btn-link" href="/cliente/form/{{clientes.cod}}">Editar</a>
+                                            <a class="btn btn-link" href="/cliente/delete/{{clientes.cod}}">Eliminar</a>
+                                            <a class="btn btn-link" href="/cliente/delete/{{clientes.cod}}">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block scrips %}
+
+    <!-- datatable --> 
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!-- Custom -->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#listado').DataTable();
+        });
+
+
+    </script>
+
+{% endblock %}
