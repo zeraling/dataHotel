@@ -1,0 +1,103 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="row">
+        <div id="msj"></div>
+        <form id="formHotel" action="#" method="post">
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Registro de Hoteles</div>
+                <div class="panel-body">
+                    {% set id = (hotel)?(['value="', hotel.id,'"']|join) :''  %}
+                    <input type="hidden" id="id_hotel" name="id_hotel" {{id|raw}}/>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">NIT</label>
+                            </div>
+                            <div class="col-sm-3">
+                                {% set nit = (hotel)?(['value="', hotel.nit,'"']|join) :''  %}
+                                <input type="text" id="nit" name="nit" placeholder="NIT" onkeypress="return APP.event.numerosEspecial(event)" class="form-control" {{nit|raw}} maxlength="15"/>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">Nombre:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                {% set nombre = (hotel)?(['value="', hotel.nombre,'"']|join) :''  %}
+                                <input type="text" id="nombre" name="nombre"  placeholder="Nombre" onkeypress="return APP.event.soloLetras(event)" class="form-control" {{nombre|raw}} required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">Direccion:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                {% set direccion = (hotel)?(['value="', hotel.direccion,'"']|join) :''  %}
+                                <input type="text" id="direccion" name="direccion"  placeholder="Direccion" onkeypress="return APP.event.soloLetras(event)" class="form-control" {{direccion|raw}} required=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">Departamento:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="ideDepartamento"  name="ideDepartamento" class="form-control">
+                                    {% if listaDepartamentos %}
+                                        <option value=""> - Seleccione Uno - </option>
+                                        {%for departamentos in listaDepartamentos%}
+                                            {% set depart = (hotel and hotel.id_departamento==departamentos.id)?'selected="selected"':'' %}
+                                            <option value="{{departamentos.id}}" {{depart}} >{{departamentos.nombre}}</option>
+                                        {%endfor%}
+                                    {% else %}
+                                        <option value=""></option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">Ciudad:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                {% set city = (hotel)?(['data-select="', hotel.id_ciudad,'"']|join) :''  %}
+                                <select id="idCiudad"  name="idCiudad" class="form-control" {{ city|raw }}>
+                                    <option value="">No se han Cargado datos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">
+                                <label class="label label-primary">Habitaciones</label>
+                            </div>
+                            <div class="col-sm-3">
+                                {% set habitaciones = (hotel)?(['value="', hotel.habitaciones,'" ']|join) :''  %}
+                                <input type="text" id="habitaciones" name="habitaciones" placeholder="Habitaciones" onkeypress="return APP.event.soloNumeros(event)" class="form-control" {{habitaciones|raw}} maxlength="3"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="col-sm-offset-5">
+                        <button type="submit"  class="btn btn-success">Guardar</button>
+                        <a class="btn btn-primary" href="/hoteles">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scrips %}
+
+    <!-- Validate --> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/localization/messages_es.js"></script>
+    <!-- Custom -->
+    <script type="text/javascript" src="{{ 'app/scripts/form-hotel.js' | baseUrl }}"></script>
+
+{% endblock %}

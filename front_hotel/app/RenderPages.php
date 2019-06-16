@@ -21,6 +21,10 @@ class RenderPages {
         ]);
 
         $this->templateEngine->addExtension(new \Twig_Extension_Debug());
+        
+        $this->templateEngine->addFilter(new \Twig_SimpleFilter('baseUrl', function ($path) {
+            return BASE_URL . $path;
+        }));
     }
 
     public function render($fileName, $data = []) {

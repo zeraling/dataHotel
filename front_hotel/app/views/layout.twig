@@ -12,7 +12,9 @@
 
         <!-- jquery-ui -->
         <link type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
-        
+       
+        <link rel="stylesheet" href="{{ 'template/css/font-awesome.min.css' | baseUrl }}">
+        <link rel="stylesheet" href="{{ 'template/css/base.css' | baseUrl }}">
         <title>Hola Hotel</title>
 
         {% block styles %}{% endblock %}
@@ -35,7 +37,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" 
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
         
-        <script type="text/javascript" src="template/js/utils.js"></script>
+        <script type="text/javascript" src="{{ 'template/js/utils.js' | baseUrl }}"></script>
         {% block scrips %}{% endblock %}
     </body>
 
