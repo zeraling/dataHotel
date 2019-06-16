@@ -11,8 +11,9 @@ $map->get('index', '/', ['App\Controllers\IndexController', 'indexAction']);
 /// administracion hotel
 $map->get('lista.hotel', '/hoteles', ['App\Controllers\HotelesController', 'getHoteles']);
 $map->post('add.hotel', '/hotel/add', ['App\Controllers\HotelesController', 'addHotel']);
-$map->post('edit.hotel', '/hotel/edit', ['App\Controllers\HotelesController', 'updateHotel']);
+$map->post('edit.hotel', '/hotel/{id}/edit', ['App\Controllers\HotelesController', 'updateHotel']);
 $map->get('get.hotel', '/hotel/{id}', ['App\Controllers\HotelesController', 'getHotel']);
+$map->get('get.detalHotel', '/hotel/{id}/detals', ['App\Controllers\HotelesController', 'getDetallesHotel']);
 
 $map->get('lista.dep', '/list-depar', ['App\Controllers\CiudadesController', 'getDepartamentos']);
 $map->get('lista.ciu', '/list-ciudad{/id}', ['App\Controllers\CiudadesController', 'getCiudadesDep']);

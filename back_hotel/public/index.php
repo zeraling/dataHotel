@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 
 //incluye la carga automatica de dependencias 
 (file_exists('../vendor/autoload.php')) ? require_once '../vendor/autoload.php' : die('Dependencias no Cargadas!');

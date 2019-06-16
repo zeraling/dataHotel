@@ -57,7 +57,7 @@ class AdminController {
                 // se compruebas las validaciones
                 $hotelValidacion->assert($data);
                 // se comprueba si ya existe el hotel
-                $hotel = Hoteles::find($data->hotel);
+                $hotel = Hoteles::findOrFail($data->hotel);
 
                 if ($hotel) {
                     // se comprueba si ya existe la acomodacion en el hotel
@@ -88,6 +88,8 @@ class AdminController {
                 }
             } catch (NestedValidationException $exception) {
                 $res = array('res' => false, 'error' => 'valdation', 'message' => $exception->getMessages());
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exc) {
+                $res = array('res' => false, 'message' => 'No se encontro el registro');
             } catch (QueryException $exception) {
                 $res = array('res' => false, 'error' => 'query', 'message' => $exception->getMessage());
             } catch (\Exception $exception) {
@@ -108,7 +110,7 @@ class AdminController {
             $habitacionH->delete();
             $res = array('res' => true, 'message' => 'Se elimino correctamente la habitacion del hotel');
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exc) {
-            $res = array('res' => false, 'message' => 'No se encontro el registro');
+            $res = array('res' => false, 'error' => 'nofound','message' => 'No se encontro el registro');
         } catch (\Exception $exception) {
             $res = array('res' => false, 'error' => 'exception', 'message' => $exception->getMessage());
         }
