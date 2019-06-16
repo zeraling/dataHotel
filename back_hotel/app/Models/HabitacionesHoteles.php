@@ -17,4 +17,13 @@ class HabitacionesHoteles extends Model  {
     //put your code here
     protected $table = 'habitacioneshoteles';
     
+    public $timestamps = false;
+    
+    public function acomodacion(){
+        return $this->hasOne('App\Models\AcomodacionHabitaciones', 'id', 'id_acomodacion_h');
+    }
+     public function hotel(){
+        return $this->hasOne('App\Models\Hoteles', 'id', 'id_hotel');
+    }
+    
 }

@@ -1,6 +1,7 @@
 <?php
 
-require_once '../vendor/autoload.php';
+//incluye la carga automatica de dependencias 
+(file_exists('../vendor/autoload.php')) ? require_once '../vendor/autoload.php' : die('Dependencias no Cargadas!');
 
 use Aura\Router\RouterContainer;
 use WoohooLabs\Harmony\Harmony;
@@ -35,7 +36,8 @@ try {
     $route = $matcher->match($request);
 
     if (!$route) {
-        echo 'No route';
+        $emitter = new SapiEmitter();
+        $emitter->emit(new Response\EmptyResponse(404));
     } else {
         
         //Boot Database Connection

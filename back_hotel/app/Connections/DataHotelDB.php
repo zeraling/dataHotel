@@ -29,7 +29,10 @@ class DataHotelDB  {
             'password' => $_ENV['DB_PASS'],
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix' => ''
+            'prefix' => '',
+            'options'   => [
+                \PDO::ATTR_EMULATE_PREPARES => true
+            ]
         ]);
 
          // Make this Capsule instance available globally via static methods... (optional)

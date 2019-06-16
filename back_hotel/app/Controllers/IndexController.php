@@ -24,18 +24,14 @@ class IndexController {
 
     public function getAcomodaciones(ServerRequest $request) {
 
-        $params = $request->getQueryParams();
+        $code = $request->getAttribute('id');
 
-        if ($params['ide_habt'] != NULL) {
-            if ($params['ide_habt'] > 0) {
-                $respuesta = AcomodacionHabitaciones::where('id_habitacion', $params['ide_habt'])
-                        ->with('habitacion', 'acomodacion')
-                        ->get();
-            } else {
-                $respuesta = array('error' => '2', 'message' => 'data not sent correctly');
-            }
+        if ($code != null && $code > 0) {
+            $respuesta = AcomodacionHabitaciones::where('id_habitacion', $code)
+                    ->with('habitacion', 'acomodacion')
+                    ->get();
         } else {
-            $respuesta = array('error' => '1', 'message' => 'parameters not sent');
+            $respuesta = array('res' =>false, 'message' => 'data not sent correctly');
         }
 
         return new JsonResponse($respuesta);

@@ -18,20 +18,15 @@ class CiudadesController {
 
     public function getCiudadesDep(ServerRequest $request) {
 
-        $params = $request->getQueryParams();
+        $code = $request->getAttribute('id');
 
-        if ($params['depart'] != NULL) {
-            if ($params['depart'] > 0) {
-                $respuesta = Ciudades::where('id_departamento', $params['depart'])
-                        ->with('departamento')
-                        ->get();
-            } else {
-                $respuesta = array('error' => '2', 'message' => 'data not sent correctly');
-            }
+        if ($code != null && $code > 0) {
+            $respuesta = Ciudades::where('id_departamento', $code)
+                    ->with('departamento')
+                    ->get();
         } else {
-            $respuesta = array('error' => '1', 'message' => 'parameters not sent');
+            $respuesta = Ciudades::with('departamento')->get();
         }
-
         return new JsonResponse($respuesta);
     }
 
