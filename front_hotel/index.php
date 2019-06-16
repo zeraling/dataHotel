@@ -12,7 +12,7 @@ $router = new RouteCollector();
 $url = isset($_GET['url']) ? $_GET['url'] : '/';
 
 $router->controller('/', App\Controllers\IndexController::class);
-$router->controller('/admin', App\Controllers\AdminController::class);
+$router->controller('/hoteles', App\Controllers\AdminController::class);
 
 //generar vistas de aplicacion
 try {
